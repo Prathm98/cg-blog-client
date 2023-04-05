@@ -1,4 +1,6 @@
 
 body {
   font-family: (--font-family);
+  margin: 0;
+  width: 98%;
 }   

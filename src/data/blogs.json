@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "title": "This is dummy blog post",
+        "author": {
+            "name": "Test user",
+            "username": "test_user"
+        },
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!",
+        "likes": 20,
+        "comments": 4
+    },
+    {
+        "id": 2,
+        "title": "This is dummy blog post",
+        "author": {
+            "name": "Test user",
+            "username": "test_user"
+        },
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!",
+        "likes": 10,
+        "comments": 4
+    },
+    {
+        "id": 3,
+        "title": "This is dummy blog post",
+        "author": {
+            "name": "Test user",
+            "username": "test_user"
+        },
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!",
+        "likes": 20,
+        "comments": 4
+    }
+]
