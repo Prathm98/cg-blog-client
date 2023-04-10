@@ -4,7 +4,7 @@ import { Skeleton } from 'primereact/skeleton';
 const BlogContainerSkelton = () => {
   return (
     <>{
-        Array(3).fill(0).map(() => <div className="card justify-content-center mt-4">
+        Array(3).fill(0).map((_, i) => <div key={i} className="card justify-content-center mt-4">
             <div className="border-round border-1 surface-border p-4 surface-card">
                 <div className="flex mb-3">
                     <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>

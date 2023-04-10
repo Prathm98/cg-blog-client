@@ -1,14 +1,25 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
+import { clearUser } from '../../redux/actions/userActions'
 import logo from './../../images/logo.svg'
 
 const Header = () => {
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   return (<>
         <div className="topnav" id="myTopnav">
             <Link to="/">
                 <img src={logo} className="logo" alt="CG logo" />
             </Link>
-            <NavLink to="/about">About</NavLink>
+            {!user? 
+              <NavLink to="/login">Login</NavLink>:
+              <>
+                <Link to="#" onClick={() => dispatch(clearUser())}>Logout</Link>
+                <NavLink to="/profile">Profile</NavLink>
+              </>
+            }
             <NavLink to="/blogs">Blogs</NavLink>
             <Link to="#" className="icon" onClick={() => myFunction()}>
                 <i className="pi pi-bars"></i>
