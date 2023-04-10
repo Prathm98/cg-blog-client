@@ -11,3 +11,10 @@ export const isValidEmail = (value) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) return true;
     return false;
 }
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+export const formatDate = (value) => {
+    let dt = new Date(value);
+    let res = `${dt.getDate()} ${months[dt.getMonth()]}, ${dt.getFullYear()}`;
+    return res;
+}

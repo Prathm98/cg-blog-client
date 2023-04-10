@@ -6,7 +6,7 @@ const blogReducer = (state=initialState, action) => {
     let updatedData;
     switch(action.type){
         case FETCH_BLOG_SUCCESS:
-            return {...state, data: [...state.data, ...action.payload], loading: false}
+            return {...state, data: [...action.payload], loading: false}
         case FETCH_BLOG_START:
             return {...state, loading: true}
         case FETCH_BLOG_FAIL:
@@ -14,7 +14,7 @@ const blogReducer = (state=initialState, action) => {
         case LIKE_BLOG:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
-                    return {...item, likes: +item.likes + 1}
+                    return {...item, likes: +item.likes + 1, isLiked: "1"}
                 }else{
                     return item;
                 }
@@ -23,7 +23,7 @@ const blogReducer = (state=initialState, action) => {
         case UNLIKE_BLOG:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
-                    return {...item, likes: +item.likes - 1}
+                    return {...item, likes: +item.likes - 1, isLiked: "0"}
                 }else{
                     return item;
                 }
