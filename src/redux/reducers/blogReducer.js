@@ -1,16 +1,20 @@
-import { FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG } from "../actions/types";
+import { FETCH_BLOG_FAIL, FETCH_BLOG_START, FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG } from "../actions/types";
 
-const initialState = {data:[], error: null}
+const initialState = {data: [], error: null, loading: false}
 
 const blogReducer = (state=initialState, action) => {
     let updatedData;
     switch(action.type){
         case FETCH_BLOG_SUCCESS:
-            return {...state, data: [...state.data, ...action.payload]}
+            return {...state, data: [...state.data, ...action.payload], loading: false}
+        case FETCH_BLOG_START:
+            return {...state, loading: true}
+        case FETCH_BLOG_FAIL:
+            return {...state, loading: false, error: action.payload}
         case LIKE_BLOG:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
-                    return {...item, likes: item.likes + 1}
+                    return {...item, likes: +item.likes + 1}
                 }else{
                     return item;
                 }
@@ -19,7 +23,7 @@ const blogReducer = (state=initialState, action) => {
         case UNLIKE_BLOG:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
-                    return {...item, likes: item.likes + 1}
+                    return {...item, likes: +item.likes - 1}
                 }else{
                     return item;
                 }

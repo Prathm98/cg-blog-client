@@ -62,3 +62,13 @@
         text-align: left;
     }
 }
+
+.input-error{
+    color: red;
+    margin-bottom: 10px;
+}
+
+.center {
+    text-align: center;
+    text-transform: uppercase;
+}
