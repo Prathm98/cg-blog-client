@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getBlogById, likeDislikeBlog } from '../../services/blog.service';
 import { formatDate } from '../../utils/helpers';
 import BlogViewSkelton from './helper/BlogViewSkelton';
+import CommentItem from './helper/CommentItem';
 
 const BlogView = () => {
   const {blog_id} = useParams();
@@ -52,13 +53,19 @@ const BlogView = () => {
       <div className="lg:col-8 md:col-8 col-10">
         {blogData.loading? <BlogViewSkelton />: 
           blogData.data && blogData.data.blog?
+          <>
             <Card className='mt-3' title={blogData.data.blog.title} 
               footer={footer(blogData.data.blog.id, blogData.data.likes, blogData.data.comments)}
               subTitle={<sup>{formatDate(blogData.data.blog.created)} : Posted by &nbsp;
                 <Link to={`/users/${blogData.data.blog.user.username}`}>{blogData.data.blog.user.username}</Link>
               </sup>} >
               <div>{blogData.data.blog.description}</div>  
-            </Card>: <>Unable to fetch blog, try again in sometime.</>}
+            </Card>
+            <div className="card">
+              <h3>Comments ({blogData.data.comments.length})</h3>
+              {blogData.data.comments.map(comment => <CommentItem comment={comment} />)}
+            </div>
+          </>: <>Unable to fetch blog, try again in sometime.</>}
       </div>
       <div className="lg:col-2 md:col-2 col-1"></div>
     </div>

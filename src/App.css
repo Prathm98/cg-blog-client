@@ -125,3 +125,12 @@
         font-size: 20px;
     }
 }
+
+.commentMsg{
+    padding: 5px;
+    background-color: #fff;
+    border: #00d084;
+    border-radius: 0px 15px;
+    font-weight: bold;
+    color: #495057;
+}
