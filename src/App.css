@@ -2,7 +2,7 @@
     overflow: hidden;
     background-color: #fff;
     z-index: 100;
-    box-shadow: 5px 5px 5px #ddd;
+    /* box-shadow: 5px 5px 5px #ddd; */
     position: fixed;
     width: 100%;
 }
@@ -80,4 +80,48 @@
 
 .blog-title:hover {
     color: #219669;
+}
+
+/* .home-banner {
+    height: 460px;
+} */
+.home-banner .content{
+    color: #fff;
+    height: 460px;
+    z-index: 1;
+    position: absolute;
+    font-size: 40px;
+    width: 110%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 5%;
+}
+
+.home-banner img{
+    width: 110%;
+    position: absolute;
+    min-height: 250px;
+}
+
+.impact-section{
+    margin-top: 500px;
+}
+
+@media screen and (max-width: 980px) {
+    .home-banner .content{
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .home-banner .content{
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .home-banner .content{
+        font-size: 20px;
+    }
 }
