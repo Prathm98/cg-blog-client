@@ -22,19 +22,23 @@ export const fetchBlogs = (start=0, end=10) => async (dispatch) => {
 }
 
 export const likeBlog = (blog_id) => async (dispatch) => {
-    await likeDislikeBlog(blog_id, true);
+    const res = await likeDislikeBlog(blog_id, true);
 
-    dispatch({
-        type: LIKE_BLOG,
-        payload: blog_id
-    })
+    if(res){
+        dispatch({
+            type: LIKE_BLOG,
+            payload: blog_id
+        })
+    }
 }
 
 export const unlikeBlog = (blog_id) => async (dispatch) => {
-    await likeDislikeBlog(blog_id, false);
+    const res = await likeDislikeBlog(blog_id, false);
     
-    dispatch({
-        type: UNLIKE_BLOG,
-        payload: blog_id
-    })
+    if(res){
+        dispatch({
+            type: UNLIKE_BLOG,
+            payload: blog_id
+        })
+    }
 }

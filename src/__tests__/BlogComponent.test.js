@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import BlogComponent from '../components/pages/BlogComponent';
 
+jest.mock('axios')
+
 describe("BlogComponent test suite", function(){
     let mountedComponent;
     beforeEach(() => {

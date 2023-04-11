@@ -16,8 +16,8 @@ const BlogContainer = () => {
 
     return (
         <div className="grid">
-            <div className="col-2"></div>
-            <div className="col-8">{
+            <div className="lg:col-2 md:col-2 col-1"></div>
+            <div className="lg:col-8 md:col-8 col-10">{
                 blog.loading? 
                     <BlogContainerSkelton /> : (
                         blog.error? 
@@ -29,7 +29,7 @@ const BlogContainer = () => {
                     )
             }
             </div>
-            <div className="col-2"></div>
+            <div className="lg:col-2 md:col-2 col-1"></div>
         </div>
     )
 }

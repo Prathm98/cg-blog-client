@@ -72,3 +72,12 @@
     text-align: center;
     text-transform: uppercase;
 }
+
+.blog-title {
+    text-decoration: none;
+    color: #3e82bb;
+}
+
+.blog-title:hover {
+    color: #219669;
+}

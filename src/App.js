@@ -8,6 +8,7 @@ import LoginComponent from './components/pages/LoginComponent';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './redux/actions/userActions';
 import RegisterComponent from './components/pages/RegisterComponent';
+import BlogView from './components/pages/BlogView';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<div>Home</div>} />
           <Route path="/blogs" element={<BlogContainer />} />
+          <Route path="/blogs/:blog_id/view" element={<BlogView />} />
           <Route path="/blogs/post" element={<BlogCreate />} />
           <Route path="/login" element={<LoginComponent />} />
           <Route path="/register" element={<RegisterComponent />} />
