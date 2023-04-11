@@ -2,7 +2,6 @@ import { Card } from 'primereact/card';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom'
-import { likeBlog, unlikeBlog } from '../../redux/actions/BlogActions';
 import { getBlogById, likeDislikeBlog } from '../../services/blog.service';
 import { formatDate } from '../../utils/helpers';
 import BlogViewSkelton from './helper/BlogViewSkelton';
