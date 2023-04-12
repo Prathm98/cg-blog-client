@@ -7,7 +7,6 @@ import { getBlogById, likeDislikeBlog } from '../../services/blog.service';
 import { formatDate } from '../../utils/helpers';
 import BlogViewSkelton from './helper/BlogViewSkelton';
 import CommentItem from './helper/CommentItem';
-import Postcomment from './helper/Postcomment';
 
 const BlogView = () => {
   const {blog_id} = useParams();

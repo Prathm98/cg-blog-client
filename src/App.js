@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { loadUser } from './redux/actions/userActions';
 import RegisterComponent from './components/pages/RegisterComponent';
 import BlogView from './components/pages/BlogView';
+import HomePage from './components/pages/HomePage';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -23,7 +24,7 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<div>Home</div>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/blogs" element={<BlogContainer />} />
           <Route path="/blogs/:blog_id/view" element={<BlogView />} />
           <Route path="/blogs/post" element={<BlogCreate />} />
