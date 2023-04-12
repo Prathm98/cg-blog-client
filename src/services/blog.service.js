@@ -51,3 +51,17 @@ export const likeDislikeBlog = async (blog_id, doLike) => {
         return null;
     }
 }
+
+// creates the comment
+export const postComment = async (blog_id, message) => {
+    try {
+        const blog = await axios.post(restURL + `/api/blog/${blog_id}/comment`, {
+            message
+        });
+
+        return blog.data.statusCode === 200;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}

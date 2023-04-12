@@ -18,3 +18,7 @@ export const formatDate = (value) => {
     let res = `${dt.getDate()} ${months[dt.getMonth()]}, ${dt.getFullYear()}`;
     return res;
 }
+
+export const getFirstChar = (value) => {
+    return (value[0]+"").toLocaleUpperCase()
+}

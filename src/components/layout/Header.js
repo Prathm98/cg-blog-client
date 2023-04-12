@@ -17,7 +17,7 @@ const Header = () => {
               <NavLink to="/login">Login</NavLink>:
               <>
                 <Link to="#" onClick={() => dispatch(clearUser())}>Logout</Link>
-                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to={`/user/${user.username}`}>Profile</NavLink>
               </>
             }
             <NavLink to="/blogs">Blogs</NavLink>
