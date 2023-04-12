@@ -1,5 +1,5 @@
 import { getBlogs, likeDislikeBlog } from '../../services/blog.service'
-import {FETCH_BLOG_FAIL, FETCH_BLOG_START, FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG} from './types'
+import {Add_COMMENT, FETCH_BLOG_FAIL, FETCH_BLOG_START, FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG} from './types'
 
 export const fetchBlogs = (start=0, end=10) => async (dispatch) => {
     dispatch({
@@ -41,4 +41,11 @@ export const unlikeBlog = (blog_id) => async (dispatch) => {
             payload: blog_id
         })
     }
+}
+
+export const commentBlog = (comment) => async (dispatch) => {
+    dispatch({
+        type: Add_COMMENT,
+        payload: comment
+    })
 }

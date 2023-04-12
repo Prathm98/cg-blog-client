@@ -84,7 +84,8 @@ const BlogView = () => {
               <div>{blogData.data.blog.description}</div>  
             </Card>
             {user && <div className="card">
-              <Postcomment blog_id={blogData.data.blog.id} toast={toast} handleCommentPost={handleCommentPost} />
+              <Postcomment blog_id={blogData.data.blog.id} toast={toast}
+                username={user.username} handleCommentPost={handleCommentPost} />
             </div>}
             <div className="card">
               <h3>Comments ({blogData.data.comments.length})</h3>

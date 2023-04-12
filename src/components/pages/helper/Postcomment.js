@@ -1,10 +1,12 @@
 import { Button } from 'primereact/button'
 import { InputTextarea } from 'primereact/inputtextarea'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { commentBlog } from '../../../redux/actions/BlogActions';
 import { postComment } from '../../../services/blog.service';
 
 const Postcomment = ({ blog_id, toast, handleCommentPost }) => {
-
+    const dispatch = useDispatch();
     const [comment, setComment] = useState({
         value: '', error: '', valid: false
     });
@@ -40,6 +42,7 @@ const Postcomment = ({ blog_id, toast, handleCommentPost }) => {
             })
             setComment({value: '', error: "", valid: false})
             handleCommentPost(comment.value)
+            dispatch(commentBlog(blog_id))
           }else{
             toast.current.show({
               severity: 'error',
