@@ -9,8 +9,6 @@ const BlogComponent1 = ({blog: {id, title, likes, comments, description, usernam
         <Link to={`/blogs/${id}/view`} className="blog-title">{title}</Link>
     )
 
-    console.log(description)
-
     const handleLike = (id, isLiked) => {
         if(user){
             likeDislikeBlog(id, isLiked).then(data => {
