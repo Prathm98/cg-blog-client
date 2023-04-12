@@ -1,16 +1,31 @@
 import React from 'react'
 import { Card } from 'primereact/card';
 import { Link } from 'react-router-dom';
-import { likeBlog, unlikeBlog } from '../../redux/actions/BlogActions';
-import { useDispatch } from 'react-redux';
 import { formatDate, truncateText } from '../../utils/helpers';
+import { likeDislikeBlog } from '../../services/blog.service';
 
-const BlogComponent = ({blog: {id, title, likes, comments, description, username, created, isLiked}}) => {
-    const dispatch = useDispatch();
-    
+const BlogComponent1 = ({blog: {id, title, likes, comments, description, username, created, isLiked}, likeAction, user, toast}) => {
     const titleHeader = (
         <Link to={`/blogs/${id}/view`} className="blog-title">{title}</Link>
     )
+
+    console.log(description)
+
+    const handleLike = (id, isLiked) => {
+        if(user){
+            likeDislikeBlog(id, isLiked).then(data => {
+              if(data){
+                likeAction(id, isLiked)
+              }
+            })
+        }else{
+            toast.current.show({
+              severity: 'info',
+              summary: 'Login to like the blog.',
+              life: 3000,
+            })
+        }
+    }
 
     const subTitle = (
         <sup>{formatDate(created)} : Posted by &nbsp;
@@ -21,9 +36,9 @@ const BlogComponent = ({blog: {id, title, likes, comments, description, username
         <div className="flex flex-wrap justify-content gap-2">
             { +isLiked === 0?
                 <i className="cursor-pointer pi pi-thumbs-up" style={{color: 'black'}}
-                onClick={() => dispatch(likeBlog(id))}></i>
+                onClick={() => handleLike(id, true)}></i>
                 :<i className="cursor-pointer pi pi-thumbs-up-fill" style={{color: 'black'}}
-                onClick={() => dispatch(unlikeBlog(id))}></i>
+                onClick={() => handleLike(id, false)}></i>
             } {likes}
             <i className="cursor-pointer pi pi-comments" style={{color: 'black'}}></i> {comments}
         </div>
@@ -40,4 +55,4 @@ const BlogComponent = ({blog: {id, title, likes, comments, description, username
   )
 }
 
-export default BlogComponent
+export default BlogComponent1

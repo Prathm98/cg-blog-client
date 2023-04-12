@@ -131,6 +131,27 @@
     background-color: #fff;
     border: #00d084;
     border-radius: 0px 15px;
-    font-weight: bold;
+    display: flex;
     color: #495057;
+}
+
+.commentContent{
+    padding-left: 8px;
+}
+
+.user-card{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5%;
+    margin-bottom: 2%;
+}
+
+.user-card-content{
+    margin-left: 4%;
+}
+
+.user-name-title{
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: bold;
 }

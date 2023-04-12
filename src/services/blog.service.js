@@ -65,3 +65,14 @@ export const postComment = async (blog_id, message) => {
         return null;
     }
 }
+
+// Fetches the blogs by username from server
+export const getBlogsByUserName = async (username) => {
+    try {
+        const blogs = await axios.get(restURL + `/api/blog/user/${username}`);
+        return blogs.data.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}

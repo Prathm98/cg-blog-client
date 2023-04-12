@@ -1,11 +1,14 @@
+import { Button } from 'primereact/button';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchBlogs } from '../../redux/actions/BlogActions';
 import BlogComponent from './BlogComponent';
 import BlogContainerSkelton from './helper/BlogContainerSkelton';
 
 const BlogContainer = () => {
     const blog = useSelector(state => state.blog)
+    const user = useSelector(state => state.user)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -16,6 +19,9 @@ const BlogContainer = () => {
 
     return (
         <div className="grid">
+            {user && <div className="lg:col-12 md:col-12 col-12 mt-4 text-right create-blog-button">
+                <Link to="/blogs/post" className='mr-4'><Button icon="pi pi-plus-circle" iconPos="right">&nbsp;Post new Blog</Button></Link>
+            </div>}
             <div className="lg:col-2 md:col-2 col-1"></div>
             <div className="lg:col-8 md:col-8 col-10">{
                 blog.loading? 
