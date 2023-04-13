@@ -70,7 +70,7 @@ const UserProfile = () => {
                             </Link>
                         </div>}
 
-                        <h4 style={{textTransform: 'capitalize'}}>{username}'s Blogs</h4>
+                        <h4><span  style={{textTransform: 'capitalize'}}>{username}</span>'s Blogs</h4>
                         {(
                             blogs.blogs && blogs.blogs.length === 0? 
                                 <h3 className='center'>No blogs available</h3>

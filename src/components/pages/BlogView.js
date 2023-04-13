@@ -9,6 +9,7 @@ import { getBlogById, likeDislikeBlog } from '../../services/blog.service';
 import { formatDate } from '../../utils/helpers';
 import BlogViewSkelton from './helper/BlogViewSkelton';
 import CommentItem from './helper/CommentItem';
+import LikeUserSidebar from './helper/LikeUserSidebar';
 import MessageComponent from './helper/MessageComponent';
 import Postcomment from './helper/Postcomment';
 
@@ -79,7 +80,7 @@ const BlogView = () => {
             <i className="cursor-pointer pi pi-thumbs-up-fill" 
               style={{color: 'black'}}
               onClick={() => handleLikeAction(id, false)}></i>
-        } {likes.length}
+        } <LikeUserSidebar likes={blogData.data.likes} />
     </div>
   );
   

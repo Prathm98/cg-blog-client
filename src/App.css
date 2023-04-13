@@ -166,3 +166,10 @@
 .message-content i {
     font-size: 3rem;
 }
+
+.user-link {
+    color: #495057;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: capitalize;
+}
