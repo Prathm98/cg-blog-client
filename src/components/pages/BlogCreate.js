@@ -5,8 +5,11 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { postBlog } from '../../services/blog.service';
+import { Link } from 'react-router-dom';
 
+// Component for creating new blog
 const BlogCreate = () => {
+  // Declaration and Initialization of states
   const [title, setTitle] = useState({
     value: '', error: '', valid: false
   });
@@ -16,9 +19,9 @@ const BlogCreate = () => {
   });
 
   const [progress, setProgress] = useState(false)
-
   const toast = useRef(null);
 
+  // Handler for blog title validation
   const handleTitle = value => {
     if(value === undefined || value === null || value.trim().length === 0){
       setTitle({value: value, error: "Title is required!", valid: false})
@@ -27,6 +30,7 @@ const BlogCreate = () => {
     }
   }
 
+  // Handler for blog content validation
   const handleContent = value => {
     if(value === undefined || value === null || value.trim().length === 0){
       setContent({value: value, error: "Content is required!", valid: false})
@@ -37,8 +41,10 @@ const BlogCreate = () => {
     }
   }
 
+  // Handler for blog submit action
   const handleSubmit = async () => {
     setProgress(true);
+    // Reuired fields validation
     if(!title.valid || !content.valid){
       toast.current.show({
         severity: 'warn',
@@ -47,6 +53,7 @@ const BlogCreate = () => {
       })
       setProgress(false);
     }else{
+      // Calling service to post a blog
       const postRes = await postBlog(title.value, content.value);
       if(postRes){
         toast.current.show({
@@ -70,25 +77,43 @@ const BlogCreate = () => {
   return (
     <div className="grid">
       <Toast ref={toast} />
+      <div className="lg:col-12 md:col-12 col-12 mt-4 text-right create-blog-button">
+        <Link to="/blogs/" className='mr-4'>
+          <Button icon="pi pi-arrow-left" iconPos="right">
+            &nbsp;Go to Blogs
+          </Button>
+        </Link>
+      </div>
+
       <div className="col-3"></div>
       <div className="col-6 flex justify-content-center mt-4">
-      <Card title="Post blog" style={{width: '100%'}}>
-        <div className="flex flex-column gap-2">
+        <Card 
+          title="Post blog" 
+          style={{width: '100%'}}>
+          <div className="flex flex-column gap-2">
             <label htmlFor="title">Title</label>
-            <InputText id="title" aria-describedby="title-help" value={title.value}
+            <InputText 
+              id="title" 
+              aria-describedby="title-help" 
+              value={title.value}
               onChange={e => handleTitle(e.target.value)} />
             <small id="title-help" className="input-error">{title.error}</small>
-        </div>
-        <div className="flex flex-column gap-2">
+          </div>
+          <div className="flex flex-column gap-2">
             <label htmlFor="content">Content</label>
-            <InputTextarea id="content" value={content.value} 
-              onChange={(e) => handleContent(e.target.value)} rows={5} cols={30}
+            <InputTextarea 
+              id="content" value={content.value} 
+              onChange={(e) => handleContent(e.target.value)} 
+              rows={5} cols={30}
               aria-describedby="blog-content" />
             <small id="blog-content" className="input-error">{content.error}</small>
-        </div>
-        <Button label="Submit" icon={progress? 'pi pi-spin pi-spinner': 'pi pi-send'}
-          onClick={handleSubmit} disabled={progress} />
-      </Card>
+          </div>
+          <Button 
+            label="Submit" 
+            icon={progress? 'pi pi-spin pi-spinner': 'pi pi-send'}
+            onClick={handleSubmit} 
+            disabled={progress} />
+        </Card>
       </div>
       <div className="col-3"></div>
     </div>

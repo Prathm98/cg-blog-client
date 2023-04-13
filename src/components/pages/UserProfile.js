@@ -9,20 +9,28 @@ import BlogContainerSkelton from './helper/BlogContainerSkelton';
 import BlogComponent1 from './BlogComponent1';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
+import MessageComponent from './helper/MessageComponent';
 
+// User profile component
 const UserProfile = () => {
+    // Declaration and initialization of states and params
     const user = useSelector(state => state.user);
     const {username} = useParams();
     const [blogs, setBlogs] = useState(null);
+    const [loading, setLoading] = useState(true);
     const toast = useRef(null)
 
+    // Effect to fetch user and blogs details
     useEffect(()=>{
         getBlogsByUserName(username).then(data => {
             setBlogs(data);
+            setLoading(false);
         })
     }, [username])
 
+    // Like action handler
     const likeAction = (id, isLiked) => {
+        // Updating component state on like action
         let updatedBlogs = blogs.blogs.map(blog => {
             if(+blog.id === +id){
                 if(isLiked) return {...blog, likes: +blog.likes + 1, isLiked}
@@ -38,7 +46,8 @@ const UserProfile = () => {
             <Toast ref={toast} />
             <div className="lg:col-2 md:col-2 col-1"></div>
             <div className="lg:col-8 md:col-8 col-10 mt-4">
-                {blogs !== null ? 
+            {!loading? 
+                blogs !== null ? 
                 <Card>
                     <div className='user-card'>
                         <div>
@@ -54,22 +63,33 @@ const UserProfile = () => {
                     </div>
                     <div>
                         {user && <div className="col-12 mt-4 create-blog-button text-right">
-                            <Link to="/blogs/post" className='mr-4'><Button icon="pi pi-plus-circle" iconPos="right">&nbsp;Post new Blog</Button></Link>
+                            <Link to="/blogs/post" className='mr-4'>
+                                <Button icon="pi pi-plus-circle" iconPos="right">
+                                    &nbsp;Post new Blog
+                                </Button>
+                            </Link>
                         </div>}
+
                         <h4 style={{textTransform: 'capitalize'}}>{username}'s Blogs</h4>
                         {(
                             blogs.blogs && blogs.blogs.length === 0? 
                                 <h3 className='center'>No blogs available</h3>
                                 : blogs.blogs.map(blog => 
                                     <BlogComponent1  
-                                    likeAction={likeAction}
-                                    user={user} toast={toast}
-                                    blog={blog} key={blog.id} />)
+                                        likeAction={likeAction}
+                                        user={user} toast={toast}
+                                        blog={blog} key={blog.id} />)
                             )
                         }
                     </div>
                 </Card>:
-                <Card><BlogContainerSkelton /></Card> }
+                <MessageComponent 
+                    message="Unable to user details at moment. Please try again." 
+                    type="error" /> :
+                <Card>
+                    <BlogContainerSkelton />
+                </Card> 
+            }
             </div>
             <div className="lg:col-2 md:col-2 col-1"></div>
         </div>

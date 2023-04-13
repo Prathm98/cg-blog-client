@@ -1,9 +1,12 @@
 import { getUser } from '../../services/user.service'
 import {LOAD_USER, CLEAR_USER} from './types'
 
+// Loads user initialy based on the token
 export const loadUser = () => async (dispatch) => {
+    // retrieving token from local storage
     let token = localStorage.getItem('token')
     if(token){
+        // Calling user service to get data
         const userData = await getUser();
 
         if(userData){
@@ -19,6 +22,7 @@ export const loadUser = () => async (dispatch) => {
     }
 }
 
+// Logout action
 export const clearUser = () => (dispatch) => {
     localStorage.removeItem('token')        
     dispatch({

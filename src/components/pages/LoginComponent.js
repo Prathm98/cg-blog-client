@@ -10,8 +10,9 @@ import { loadUser } from '../../redux/actions/userActions';
 import { isValidTextField } from '../../utils/helpers';
 import setAuthToken from '../../utils/setAuthToken';
 
+// Login page component
 const LoginComponent = () => {
-    // navigate and dispatch hooks for state and navigation
+  // navigate and dispatch hooks for state and navigation
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -61,7 +62,7 @@ const LoginComponent = () => {
       })
       setProgress(false);
     }else{
-        // Login service call
+      // Login service call
       const loginRes = await login(username.value, password.value);
       if(loginRes && loginRes.statusCode === 200){
         toast.current.show({
@@ -91,31 +92,44 @@ const LoginComponent = () => {
   }
 
   return (
-    user? <Navigate to={'/blogs'} /> :
+    user? 
+    <Navigate to={'/blogs'} /> :
     <div className="grid">
       <Toast ref={toast} />
       <div className="col-12 lg:col-4 md:col-3"></div>
       <div className="col-12 lg:col-4 md:col-6 flex justify-content-center mt-4">
-      <Card title="Login" style={{width: '100%'}}>
-        <div className="flex flex-column gap-2">
-            <label htmlFor="username">Username</label>
-            <InputText type={"text"} id="username" aria-describedby="username-help" value={username.value}
-              onChange={e => handleUsername(e.target.value)} />
-            <small id="username-help" className="input-error">{username.error}</small>
-        </div>
-        <div className="flex flex-column gap-2">
-            <label htmlFor="password">Password</label>
-            <InputText type={"password"} id="password" value={password.value} 
-              onChange={(e) => handlePassword(e.target.value)}
-              aria-describedby="blog-password" />
-            <small id="blog-password" className="input-error">{password.error}</small>
-        </div>
-        <Button label="Submit" icon={progress? 'pi pi-spin pi-spinner': 'pi pi-send'}
-          onClick={handleSubmit} disabled={progress} />
-        <div className="mt-3">
-            Don't have an account? <Link to="/register">Sign Up</Link>
-        </div>
-      </Card>
+        <Card 
+          title="Login"
+          style={{width: '100%'}}>
+          <div className="flex flex-column gap-2">
+              <label htmlFor="username">Username</label>
+              <InputText 
+                type={"text"}
+                id="username"
+                aria-describedby="username-help"
+                value={username.value}
+                onChange={e => handleUsername(e.target.value)} />
+              <small id="username-help" className="input-error">{username.error}</small>
+          </div>
+          <div className="flex flex-column gap-2">
+              <label htmlFor="password">Password</label>
+              <InputText
+                type={"password"}
+                id="password"
+                value={password.value} 
+                onChange={(e) => handlePassword(e.target.value)}
+                aria-describedby="blog-password" />
+              <small id="blog-password" className="input-error">{password.error}</small>
+          </div>
+          <Button 
+            label="Submit"
+            icon={progress? 'pi pi-spin pi-spinner': 'pi pi-send'}
+            onClick={handleSubmit}
+            disabled={progress} />
+          <div className="mt-3">
+              Don't have an account? <Link to="/register">Sign Up</Link>
+          </div>
+        </Card>
       </div>
       <div className="col-12 lg:col-4 md:col-3"></div>
     </div>

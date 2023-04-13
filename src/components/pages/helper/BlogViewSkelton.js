@@ -1,6 +1,7 @@
 import { Skeleton } from 'primereact/skeleton'
 import React from 'react'
 
+// Skeleton component for Blog view page
 const BlogViewSkelton = () => {
   return (
     <>

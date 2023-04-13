@@ -1,6 +1,7 @@
 import React from 'react'
 import homeImg from '../../images/homepage.png'
 
+// Homepage component
 const HomePage = () => {
   return (<>
     <div className='home-banner'>

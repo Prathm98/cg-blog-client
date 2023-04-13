@@ -5,7 +5,7 @@ const initialState = null
 const userReducer = (state=initialState, action) => {
     switch(action.type){
         case LOAD_USER:
-            return {...action.payload}
+            return { ...action.payload }
         case CLEAR_USER:
             return null
         default:

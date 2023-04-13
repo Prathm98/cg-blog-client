@@ -155,3 +155,14 @@
     text-transform: capitalize;
     font-weight: bold;
 }
+
+.message-content {
+    font-size: xx-large;
+    color: #3e82bb;
+    text-align: center;
+    padding: 20%;
+}
+
+.message-content i {
+    font-size: 3rem;
+}

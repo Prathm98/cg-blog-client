@@ -6,11 +6,22 @@ const blogReducer = (state=initialState, action) => {
     let updatedData;
     switch(action.type){
         case FETCH_BLOG_SUCCESS:
-            return {...state, data: [...action.payload], loading: false}
+            return {
+                ...state, 
+                data: [...action.payload], 
+                loading: false
+            }
         case FETCH_BLOG_START:
-            return {...state, loading: true}
+            return {
+                ...state, 
+                loading: true
+            }
         case FETCH_BLOG_FAIL:
-            return {...state, loading: false, error: action.payload}
+            return {
+                ...state, 
+                loading: false, 
+                error: action.payload
+            }
         case LIKE_BLOG:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
@@ -19,7 +30,10 @@ const blogReducer = (state=initialState, action) => {
                     return item;
                 }
             })
-            return {...state, data: [...updatedData]}
+            return {
+                ...state, 
+                data: [...updatedData]
+            }
         case UNLIKE_BLOG:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
@@ -28,7 +42,10 @@ const blogReducer = (state=initialState, action) => {
                     return item;
                 }
             })
-            return {...state, data: [...updatedData]}
+            return {
+                ...state, 
+                data: [...updatedData]
+            }
         case Add_COMMENT:
             updatedData = state.data.map(item => {
                 if(item.id === action.payload){
@@ -37,7 +54,10 @@ const blogReducer = (state=initialState, action) => {
                     return item;
                 }
             })
-            return {...state, data: [...updatedData]}
+            return {
+                ...state, 
+                data: [...updatedData]
+            }
         default:
             return state;
     }
