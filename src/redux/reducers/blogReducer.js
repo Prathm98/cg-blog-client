@@ -1,4 +1,5 @@
-import { Add_COMMENT, FETCH_BLOG_FAIL, FETCH_BLOG_START, FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG } from "../actions/types";
+import { Add_COMMENT, CLEAR_LIKE_STATUS, FETCH_BLOG_FAIL, FETCH_BLOG_START,
+    FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG } from "../actions/types";
 
 const initialState = {data: [], error: null, loading: false}
 
@@ -41,6 +42,14 @@ const blogReducer = (state=initialState, action) => {
                 }else{
                     return item;
                 }
+            })
+            return {
+                ...state, 
+                data: [...updatedData]
+            }
+        case CLEAR_LIKE_STATUS:
+            updatedData = state.data.map(item => {
+                return {...item, isLiked: "0"}
             })
             return {
                 ...state, 

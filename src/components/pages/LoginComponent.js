@@ -4,7 +4,7 @@ import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { login } from '../../services/user.service';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../../redux/actions/userActions';
 import { isValidTextField } from '../../utils/helpers';
@@ -13,7 +13,6 @@ import setAuthToken from '../../utils/setAuthToken';
 // Login page component
 const LoginComponent = () => {
   // navigate and dispatch hooks for state and navigation
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
 //   Fetching user state to get current status of user
@@ -79,7 +78,7 @@ const LoginComponent = () => {
 
         // Dispatching user loading action for app state
         dispatch(loadUser());
-        setTimeout(() => navigate('/blogs'), 2000);
+        setTimeout(() => window.location.replace('/blogs'), 2000);
       }else{
         toast.current.show({
           severity: 'error',

@@ -1,5 +1,5 @@
 import { getUser } from '../../services/user.service'
-import {LOAD_USER, CLEAR_USER} from './types'
+import {LOAD_USER, CLEAR_USER, CLEAR_LIKE_STATUS} from './types'
 
 // Loads user initialy based on the token
 export const loadUser = () => async (dispatch) => {
@@ -27,5 +27,8 @@ export const clearUser = () => (dispatch) => {
     localStorage.removeItem('token')        
     dispatch({
         type: CLEAR_USER
+    })
+    dispatch({
+        type: CLEAR_LIKE_STATUS
     })
 }

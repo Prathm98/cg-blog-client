@@ -3,6 +3,8 @@ import { Card } from 'primereact/card';
 import { Link } from 'react-router-dom';
 import { formatDate, truncateText } from '../../utils/helpers';
 import { likeDislikeBlog } from '../../services/blog.service';
+import { useDispatch } from 'react-redux';
+import { likeBlog, unlikeBlog } from '../../redux/actions/BlogActions';
 
 /** Component for blogs card for user profile section
  * Props:
@@ -16,6 +18,9 @@ const BlogComponent1 = ({blog:
     user, 
     toast
 }) => {
+    // Declaration for dispatch
+    const dispatch = useDispatch();
+
     // Title markup for card
     const titleHeader = (
         <Link to={`/blogs/${id}/view`} className="blog-title">{title}</Link>
@@ -28,6 +33,8 @@ const BlogComponent1 = ({blog:
             likeDislikeBlog(id, isLiked).then(data => {
               if(data){
                 likeAction(id, isLiked)
+                if(isLiked) dispatch(likeBlog(id));
+                else dispatch(unlikeBlog(id));
               }
             })
         }else{
@@ -42,9 +49,7 @@ const BlogComponent1 = ({blog:
 
     // subtitle markup for card
     const subTitle = (
-        <sup>{formatDate(created)} : Posted by &nbsp;
-            <Link to={`/user/${username}`}>{username}</Link>
-        </sup> 
+        <sup>{formatDate(created)}</sup> 
     )
 
     // Footer markup for card
