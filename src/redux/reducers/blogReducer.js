@@ -1,7 +1,7 @@
 import { Add_COMMENT, CLEAR_LIKE_STATUS, FETCH_BLOG_FAIL, FETCH_BLOG_START,
     FETCH_BLOG_SUCCESS, LIKE_BLOG, UNLIKE_BLOG } from "../actions/types";
 
-const initialState = {data: [], error: null, loading: false}
+const initialState = {data: [], error: null, loading: false, isFetched: false}
 
 const blogReducer = (state=initialState, action) => {
     let updatedData;
@@ -10,7 +10,8 @@ const blogReducer = (state=initialState, action) => {
             return {
                 ...state, 
                 data: [...action.payload], 
-                loading: false
+                loading: false,
+                isFetched: true
             }
         case FETCH_BLOG_START:
             return {
@@ -21,7 +22,8 @@ const blogReducer = (state=initialState, action) => {
             return {
                 ...state, 
                 loading: false, 
-                error: action.payload
+                error: action.payload,
+                isFetched: true
             }
         case LIKE_BLOG:
             updatedData = state.data.map(item => {

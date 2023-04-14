@@ -18,10 +18,10 @@ const BlogContainer = () => {
 
     // effect for blogs fetching
     useEffect(() => {
-        if(blog.data && blog.data.length === 0){
+        if(!blog.isFetched){
             dispatch(fetchBlogs())
         }
-    }, [blog.data, dispatch])
+    }, [blog.isFetched, dispatch])
 
     return (
         <div className="grid">

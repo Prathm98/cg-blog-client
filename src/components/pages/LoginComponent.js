@@ -82,7 +82,7 @@ const LoginComponent = () => {
       }else{
         toast.current.show({
           severity: 'error',
-          summary: loginRes.data,
+          summary: loginRes? loginRes.data: "Unable to login! Please try after sometime.",
           life: 3000,
         })
       }
