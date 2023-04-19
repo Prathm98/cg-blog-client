@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card } from 'primereact/card';
 import { Link } from 'react-router-dom';
-import { likeBlog, unlikeBlog } from '../../redux/actions/BlogActions';
 import { useDispatch } from 'react-redux';
 import { formatDate, truncateText } from '../../utils/helpers';
+import { likeUnlikeBlog } from '../../redux/features/blogSlice';
 
 /**
  * Component to show blog cards
@@ -42,8 +42,8 @@ const BlogComponent = ({blog:
      */
     const handleLike = (id, isLiked) => {
         if(user){
-            if(isLiked) dispatch(likeBlog(id));
-            else dispatch(unlikeBlog(id));
+            if(isLiked) dispatch(likeUnlikeBlog({id, doLike: true}));
+            else dispatch(likeUnlikeBlog({id, doLike: false}));
         }else{
             toast.current.show({
               severity: 'info',

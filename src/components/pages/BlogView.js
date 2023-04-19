@@ -4,7 +4,7 @@ import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom'
-import { likeUnlikeBlog } from '../../redux/actions/BlogActions';
+import { likeUnlikeBlog } from '../../redux/features/blogSlice';
 import { getBlogById, likeDislikeBlog } from '../../services/blog.service';
 import { formatDate } from '../../utils/helpers';
 import BlogViewSkelton from './helper/BlogViewSkelton';
@@ -46,7 +46,7 @@ const BlogView = () => {
           // filter for cheking if user has liked the blog or not
           let updatedLikes = blogData.data.likes.filter(like => like.username !==  user.username);
           if(isLiked) updatedLikes = [...blogData.data.likes, {id: 0, username: user.username}]
-          dispatch(likeUnlikeBlog(id, isLiked))
+          dispatch(likeUnlikeBlog({id, doLike: isLiked}))
           setBlogData({...blogData, isLiked, data: {...blogData.data, likes: updatedLikes}})
         }
       })

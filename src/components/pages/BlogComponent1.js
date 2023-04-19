@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { formatDate, truncateText } from '../../utils/helpers';
 import { likeDislikeBlog } from '../../services/blog.service';
 import { useDispatch } from 'react-redux';
-import { likeBlog, unlikeBlog } from '../../redux/actions/BlogActions';
+import { updateLikeStatus } from '../../redux/features/blogSlice';
 
 /** Component for blogs card for user profile section
  * Props:
@@ -33,8 +33,8 @@ const BlogComponent1 = ({blog:
             likeDislikeBlog(id, isLiked).then(data => {
               if(data){
                 likeAction(id, isLiked)
-                if(isLiked) dispatch(likeBlog(id));
-                else dispatch(unlikeBlog(id));
+                if(isLiked) dispatch(updateLikeStatus({id, doLike: true}));
+                else dispatch(updateLikeStatus({id, doLike: false}));
               }
             })
         }else{

@@ -6,7 +6,6 @@ import setAuthToken from './utils/setAuthToken';
 import BlogCreate from './components/pages/BlogCreate';
 import LoginComponent from './components/pages/LoginComponent';
 import { useDispatch } from 'react-redux';
-import { loadUser } from './redux/actions/userActions';
 import RegisterComponent from './components/pages/RegisterComponent';
 import BlogView from './components/pages/BlogView';
 import HomePage from './components/pages/HomePage';
@@ -14,6 +13,7 @@ import PrivateRoute from './components/routes/PrivateRoute';
 import UserProfile from './components/pages/UserProfile';
 import ErrorBoundary from './components/pages/helper/ErrorBoundary';
 import MessageComponent from './components/pages/helper/MessageComponent';
+import { loadUser } from './redux/features/userSlice';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
