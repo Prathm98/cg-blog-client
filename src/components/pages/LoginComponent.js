@@ -6,9 +6,9 @@ import { Toast } from 'primereact/toast';
 import { login } from '../../services/user.service';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUser } from '../../redux/actions/userActions';
 import { isValidTextField } from '../../utils/helpers';
 import setAuthToken from '../../utils/setAuthToken';
+import { loadUser } from '../../redux/features/userSlice';
 
 // Login page component
 const LoginComponent = () => {

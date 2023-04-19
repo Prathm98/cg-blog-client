@@ -1,12 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
-import { clearUser } from '../../redux/actions/userActions'
+import { clearUser } from '../../redux/features/userSlice'
 import logo from './../../images/logo.svg'
 
 const Header = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+
+  const logoutUser = () => {
+    dispatch(clearUser())
+    localStorage.clear()
+  }
 
   return (<>
         <div className="topnav" id="myTopnav">
@@ -16,7 +21,7 @@ const Header = () => {
             {!user? 
               <NavLink to="/login">Login</NavLink>:
               <>
-                <Link to="#" onClick={() => dispatch(clearUser())}>Logout</Link>
+                <Link to="#" onClick={() => logoutUser()}>Logout</Link>
                 <NavLink to={`/user/${user.username}`}>Profile</NavLink>
               </>
             }

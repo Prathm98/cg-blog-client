@@ -2,7 +2,7 @@ import { Button } from 'primereact/button'
 import { InputTextarea } from 'primereact/inputtextarea'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { commentBlog } from '../../../redux/actions/BlogActions';
+import { addComment } from '../../../redux/features/blogSlice';
 import { postComment } from '../../../services/blog.service';
 
 /**
@@ -59,7 +59,7 @@ const Postcomment = ({ blog_id, toast, handleCommentPost }) => {
           handleCommentPost(comment.value)
 
           // Dispatching store update
-          dispatch(commentBlog(blog_id))
+          dispatch(addComment(blog_id))
         }else{
           toast.current.show({
             severity: 'error',

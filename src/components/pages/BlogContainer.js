@@ -3,7 +3,7 @@ import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchBlogs } from '../../redux/actions/BlogActions';
+import { fetchBlog } from '../../redux/features/blogSlice';
 import BlogComponent from './BlogComponent';
 import BlogContainerSkelton from './helper/BlogContainerSkelton';
 import MessageComponent from './helper/MessageComponent';
@@ -19,7 +19,7 @@ const BlogContainer = () => {
     // effect for blogs fetching
     useEffect(() => {
         if(!blog.isFetched){
-            dispatch(fetchBlogs())
+            dispatch(fetchBlog())
         }
     }, [blog.isFetched, dispatch])
 
