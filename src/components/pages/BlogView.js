@@ -5,8 +5,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom'
 import { likeUnlikeBlog } from '../../redux/features/blogSlice';
-import { getBlogById, likeDislikeBlog } from '../../services/blog.service';
+import { likeDislikeBlog } from '../../services/blog.service';
 import { formatDate } from '../../utils/helpers';
+import useAxios from '../../utils/hooks/useAxios';
 import BlogViewSkelton from './helper/BlogViewSkelton';
 import CommentItem from './helper/CommentItem';
 import LikeUserSidebar from './helper/LikeUserSidebar';
@@ -20,22 +21,31 @@ const BlogView = () => {
   const user = useSelector(state => state.user)
   const toast = useRef(null);
   const dispatch = useDispatch();
-  const [blogData, setBlogData] = useState({data: null, loading: true, error: null, isLiked: false});
+  const [blogData, setBlogData] = useState({data: null, isLiked: false});
+  const { response, loading, fetchData } = useAxios({
+    url: '/api/blog/',
+    method: 'GET',
+    initialFetch: false
+  });
 
   // Effect for fetching the blog content
   useEffect(() => {
-    getBlogById(blog_id).then(data => {
-      let isLiked = false;
-      // Filter for checking if current user has liked the blog or not 
-      if(user) isLiked = data.likes.filter(like => like.username === user.username).length > 0;
-      setBlogData({data: data, error: null, loading: false, isLiked})
-    }).catch(error => {setBlogData({
-        data: null, loading: false,
-        error: "Unable to fetch blog content, please try after sometime."
-      })
-    })
+    fetchData(`/api/blog/${blog_id}`);
     // eslint-disable-next-line 
   }, [blog_id])
+
+  // Effect for fetching the blog content
+  useEffect(() => {
+    if(response) {
+      let isLiked = false;
+      // Filter for checking if current user has liked the blog or not 
+      if(user) isLiked = response.data.likes.filter(like => like.username === user.username).length > 0;
+      setBlogData({data: response.data, isLiked})
+    } else {
+      setBlogData({data: null})
+    }
+    // eslint-disable-next-line 
+  }, [response])
 
   // Handler for Like/dislike action
   const handleLikeAction = (id, isLiked) => {
@@ -97,7 +107,7 @@ const BlogView = () => {
 
       <div className="lg:col-2 md:col-2 col-1"></div>
       <div className="lg:col-8 md:col-8 col-10">
-        {blogData.loading? 
+        {loading? 
           <BlogViewSkelton />: 
           blogData.data && blogData.data.blog? <>
             <Card 

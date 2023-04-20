@@ -3,13 +3,13 @@ import { Card } from 'primereact/card'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom';
-import { getBlogsByUserName } from '../../services/blog.service';
 import { getFirstChar } from '../../utils/helpers'
 import BlogContainerSkelton from './helper/BlogContainerSkelton';
 import BlogComponent1 from './BlogComponent1';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import MessageComponent from './helper/MessageComponent';
+import useAxios from '../../utils/hooks/useAxios';
 
 // User profile component
 const UserProfile = () => {
@@ -17,16 +17,25 @@ const UserProfile = () => {
     const user = useSelector(state => state.user);
     const {username} = useParams();
     const [blogs, setBlogs] = useState(null);
-    const [loading, setLoading] = useState(true);
     const toast = useRef(null)
+    const { response, loading, fetchData } = useAxios({
+        url: '/api/blog/user/',
+        method: 'GET',
+        initialFetch: false
+    });
 
     // Effect to fetch user and blogs details
     useEffect(()=>{
-        getBlogsByUserName(username).then(data => {
-            setBlogs(data);
-            setLoading(false);
-        })
+        fetchData(`/api/blog/user/${username}`);
+        // eslint-disable-next-line
     }, [username])
+
+    // Effect to fetch user and blogs details
+    useEffect(()=>{
+        if(response) {
+            setBlogs(response.data);
+        }
+    }, [response])
 
     // Like action handler
     const likeAction = (id, isLiked) => {
